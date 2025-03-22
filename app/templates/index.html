@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WiFiMate</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/wifi.ico') }}">
+    </head>
+    <body class="bg-gray-50 text-gray-800">
+        <header class="bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="text-xl font-semibold text-gray-800">
+                    <i class="fas fa-wifi text-blue-500"></i> WiFiMate
+                </div>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a class="text-gray-600 hover:text-gray-900" href="#">Home</a></li>
+                        <li><a class="text-gray-600 hover:text-gray-900" href="#">How it Works</a></li>
+                        <li><a class="text-gray-600 hover:text-gray-900" href="#">About</a></li>
+                        <li><a class="text-gray-600 hover:text-gray-900" href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container mx-auto px-4 py-16">
+            <section class="text-center mb-16">
+                <h1 class="text-4xl font-semibold mb-4 text-gray-800">Generate WiFi QR Codes Instantly</h1>
+                <p class="text-gray-600">Create QR codes for your WiFi network in seconds. Share internet access easily and securely with WiFiMate.</p>
+            </section>
+            <section class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+                <form id="qrForm">
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="ssid">Network Name (SSID)</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="ssid" placeholder="Enter your WiFi network name" type="text">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="password">Password</label>
+                        <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="password" placeholder="Enter your WiFi password" type="password">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2" for="encryption">Security Type</label>
+                        <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="encryption">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="None">None</option>
+                        </select>
+                    </div>
+                    <button class="w-full btn-primary py-2 rounded-lg" type="submit">Generate QR Code</button>
+                </form>
+                <div class="mt-8 flex flex-col items-center">
+                    <div id="qrcode" class="mb-4"></div>
+                    <canvas id="qrCanvas" width="300" height="400" style="display: none;"></canvas>
+                    <button id="downloadBtn" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300 mt-4" style="display: none;">
+                        <i class="fas fa-download"></i> Download Card
+                    </button>
+                </div>
+            </section>
+        </main>
+        <section class="bg-white py-16">
+            <div class="container mx-auto px-4">
+                <h2 class="text-center text-3xl font-semibold mb-8 text-gray-800">Why Choose WiFiMate?</h2>
+                <div class="flex flex-col md:flex-row justify-around items-center space-y-8 md:space-y-0">
+                    <div class="text-center max-w-xs">
+                        <i class="fas fa-bolt text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Instant Generation</h3>
+                        <p class="text-gray-600">Generate QR codes for your WiFi network with ease and speed.</p>
+                    </div>
+                    <div class="text-center max-w-xs">
+                        <i class="fas fa-lock text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Secure Sharing</h3>
+                        <p class="text-gray-600">Share your WiFi credentials securely without compromising security.</p>
+                    </div>
+                    <div class="text-center max-w-xs">
+                        <i class="fas fa-mobile-alt text-4xl text-blue-500 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Mobile Friendly</h3>
+                        <p class="text-gray-600">Works perfectly on all devices for maximum convenience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row justify-between items-start space-y-8 md:space-y-0 md:space-x-8">
+                    <div class="w-full md:w-auto">
+                        <h4 class="font-semibold mb-3 text-gray-200">Quick Links</h4>
+                        <div class="flex flex-col space-y-2">
+                            <a class="footer-link text-gray-400" href="#">Home</a>
+                            <a class="footer-link text-gray-400" href="#">About</a>
+                            <a class="footer-link text-gray-400" href="#">Contact</a>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-auto">
+                        <h4 class="font-semibold mb-3 text-gray-200">Legal</h4>
+                        <div class="flex flex-col space-y-2">
+                            <a class="footer-link text-gray-400" href="#">Privacy Policy</a>
+                            <a class="footer-link text-gray-400" href="#">Terms of Service</a>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-auto">
+                        <h4 class="font-semibold mb-3 text-gray-200">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a class="footer-link text-gray-400" href="https://www.facebook.com/rozhak.official">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a class="footer-link text-gray-400" href="https://x.com/rozhak_official">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a class="footer-link text-gray-400" href="https://www.instagram.com/rozhak_official">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center border-t border-gray-800 pt-6 mt-8">
+                    <p class="text-sm text-gray-400">© 2025 WiFiMate. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </body>
+</html>
